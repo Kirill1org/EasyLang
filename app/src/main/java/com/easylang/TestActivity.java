@@ -19,7 +19,7 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test);
         NetworkService.getInstance()
                 .getJSONApi()
-                .getTranslate(API_KEY, "car", "en-ru")
+                .getTranslate(API_KEY, "My name is Maxim!", "en-ru")
                 .enqueue(new Callback<TranslateResponse>() {
                     @Override
                     public void onResponse(@NonNull Call<TranslateResponse> call, @NonNull Response<TranslateResponse> response) {
