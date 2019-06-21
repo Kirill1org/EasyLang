@@ -46,8 +46,8 @@ public class TranslateFragment extends Fragment {
         spinnerInput = getActivity().findViewById(R.id.input_lang);
         spinnerOutput = getActivity().findViewById(R.id.output_lang);
 
-        ArrayAdapter<CharSequence> adapterInput = ArrayAdapter.createFromResource(getActivity().getBaseContext(), R.array.input_data_spinner, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> adapterOutput = ArrayAdapter.createFromResource(getActivity().getBaseContext(), R.array.output_data_spinner, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterInput = ArrayAdapter.createFromResource(getActivity().getBaseContext(), R.array.input_data_spinner, R.layout.spinner_item);
+        ArrayAdapter<CharSequence> adapterOutput = ArrayAdapter.createFromResource(getActivity().getBaseContext(), R.array.output_data_spinner, R.layout.spinner_item);
         adapterInput.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapterOutput.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerInput.setAdapter(adapterInput);
