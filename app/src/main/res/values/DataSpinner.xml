@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="input_data_spinner">
+        <item>Eng</item>
+    </string-array>
+
+        <string-array name="output_data_spinner">
+            <item>Ru</item>
+        </string-array>
+
+</resources>

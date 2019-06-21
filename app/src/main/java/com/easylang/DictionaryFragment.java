@@ -8,7 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DictionaryFragment extends Fragment {
 
@@ -21,7 +28,22 @@ public class DictionaryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_dictionary, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_dictionary, container, false);
+
+        RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        List<DictionaryItem> data = new ArrayList<>();
+        data.add(new DictionaryItem("en", "ru", "cat", "кот"));
+        data.add(new DictionaryItem("en", "ru", "cat", "кот"));
+        data.add(new DictionaryItem("en", "ru", "cat", "кот"));
+
+        DictionaryAdapter dictionaryAdapter = new DictionaryAdapter(data);
+        recyclerView.setAdapter(dictionaryAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        return rootView;
     }
 
     @Override
