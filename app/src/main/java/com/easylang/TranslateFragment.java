@@ -4,15 +4,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-
-import java.security.SecurityPermission;
 
 public class TranslateFragment extends Fragment {
 
@@ -21,6 +24,11 @@ public class TranslateFragment extends Fragment {
     private Spinner spinnerInput;
     private Spinner spinnerOutput;
 
+    private EditText editTextInput;
+    private TextView textViewOutput;
+
+    private Button buttonTranslate;
+
     public static TranslateFragment newInstance() {
         return new TranslateFragment();
     }
@@ -28,14 +36,16 @@ public class TranslateFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_translate, container, false);
 
-    }
+        View rootView = inflater.inflate(R.layout.fragment_translate, container, false);
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        spinnerInput = rootView.findViewById(R.id.input_lang);
+        spinnerOutput = rootView.findViewById(R.id.output_lang);
+        editTextInput = rootView.findViewById(R.id.input_word);
+        textViewOutput = rootView.findViewById(R.id.output_word);
+        buttonTranslate = rootView.findViewById(R.id.button_translate);
 
+        return rootView;
     }
 
     @Override
@@ -43,16 +53,37 @@ public class TranslateFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(TranslateViewModel.class);
 
-        spinnerInput = getActivity().findViewById(R.id.input_lang);
-        spinnerOutput = getActivity().findViewById(R.id.output_lang);
+        ArrayAdapter<String> adapterInputLanguages = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item,
+                TranslateViewModel.getLANGUAGES());
 
-        ArrayAdapter<CharSequence> adapterInput = ArrayAdapter.createFromResource(getActivity().getBaseContext(), R.array.input_data_spinner, R.layout.spinner_item);
-        ArrayAdapter<CharSequence> adapterOutput = ArrayAdapter.createFromResource(getActivity().getBaseContext(), R.array.output_data_spinner, R.layout.spinner_item);
-        adapterInput.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapterOutput.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerInput.setAdapter(adapterInput);
-        spinnerOutput.setAdapter(adapterOutput);
+        adapterInputLanguages.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerInput.setAdapter(adapterInputLanguages);
+        spinnerOutput.setAdapter(adapterInputLanguages);
 
+        mViewModel.getTranslatedText().observe(this, s -> {
+            textViewOutput.setText(s);
+        });
+
+        buttonTranslate.setOnClickListener(this::translate);
     }
 
+    public void translate(View view) {
+        String[] languages = TranslateViewModel.getLANGUAGES();
+
+        int inputSelectedItemPosition = spinnerInput.getSelectedItemPosition();
+        int outputSelectedItemPosition = spinnerOutput.getSelectedItemPosition();
+
+        if (inputSelectedItemPosition == AdapterView.INVALID_POSITION) {
+            Toast.makeText(getActivity(), "Input language not selected", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (outputSelectedItemPosition == AdapterView.INVALID_POSITION) {
+            Toast.makeText(getActivity(), "Output language not selected", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        String lang = languages[inputSelectedItemPosition] + "-" + languages[outputSelectedItemPosition];
+        mViewModel.translate(editTextInput.getText().toString(), lang);
+    }
 }
