@@ -53,8 +53,8 @@ public class TranslateFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(TranslateViewModel.class);
 
-        ArrayAdapter<String> adapterInputLanguages = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item,
+        ArrayAdapter<String> adapterInputLanguages = new ArrayAdapter<>(getActivity(),
+                R.layout.spinner_item,
                 TranslateViewModel.getLANGUAGES());
 
         adapterInputLanguages.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
