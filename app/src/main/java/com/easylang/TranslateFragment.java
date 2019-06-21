@@ -61,7 +61,7 @@ public class TranslateFragment extends Fragment {
         spinnerInput.setAdapter(adapterInputLanguages);
         spinnerOutput.setAdapter(adapterInputLanguages);
 
-        mViewModel.getTranslatedText().observe(this, s -> {
+        mViewModel.getLiveDataTranslatedText().observe(this, s -> {
             textViewOutput.setText(s);
         });
 
