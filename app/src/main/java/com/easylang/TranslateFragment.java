@@ -53,6 +53,7 @@ public class TranslateFragment extends Fragment {
         spinnerInput.setAdapter(adapterInput);
         spinnerOutput.setAdapter(adapterOutput);
 
+
     }
 
 }
