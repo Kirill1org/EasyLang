@@ -1,31 +1,38 @@
 package com.easylang;
 
+import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TranslateViewModel extends ViewModel {
+public class TranslateViewModel extends AndroidViewModel {
     private static final String TAG = TranslateViewModel.class.getSimpleName();
 
     private static final String[] LANGUAGES = {"en", "ru"};
 
-    private final MutableLiveData<String> translatedText = new MutableLiveData<>();
+    private final MutableLiveData<String> liveDataTranslatedText = new MutableLiveData<>();
+
+    public TranslateViewModel(@NonNull Application application) {
+        super(application);
+    }
 
     public static String[] getLANGUAGES() {
         return LANGUAGES;
     }
 
-    public MutableLiveData<String> getTranslatedText() {
-        return translatedText;
+    public MutableLiveData<String> getLiveDataTranslatedText() {
+        return liveDataTranslatedText;
     }
 
-    public void translate(String text, String lang) {
-        Log.d(TAG, "translate() called with: text = [" + text + "], lang = [" + lang + "]");
+    public void translate(String text, String from, String to) {
+        String lang = from + "-" + to;
 
         NetworkService.getInstance()
                 .getJSONApi()
@@ -34,12 +41,18 @@ public class TranslateViewModel extends ViewModel {
                     @Override
                     public void onResponse(Call<TranslateResponse> call, Response<TranslateResponse> response) {
                         if (!response.isSuccessful()) {
-                            Log.d(TAG, "Something went wrong! Code: " + response.code());
+                            Toast.makeText(getApplication(), "Something went wrong! Code: " + response.code(), Toast.LENGTH_LONG).show();
                             return;
                         }
                         TranslateResponse translateResponse = response.body();
 
-                        translatedText.setValue(translateResponse.getText().get(0));
+                        String translation = translateResponse.getText().get(0);
+                        liveDataTranslatedText.setValue(translation);
+
+
+                        AppDatabase.getInstance(getApplication())
+                                .dictionaryDAO()
+                                .insert(new Dictionary(from, to, text, translation));
                     }
 
                     @Override

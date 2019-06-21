@@ -82,8 +82,6 @@ public class TranslateFragment extends Fragment {
             Toast.makeText(getActivity(), "Output language not selected", Toast.LENGTH_LONG).show();
             return;
         }
-
-        String lang = languages[inputSelectedItemPosition] + "-" + languages[outputSelectedItemPosition];
-        mViewModel.translate(editTextInput.getText().toString(), lang);
+        mViewModel.translate(editTextInput.getText().toString(), languages[inputSelectedItemPosition], languages[outputSelectedItemPosition]);
     }
 }
