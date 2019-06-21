@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,7 +38,7 @@ public class DictionaryFragment extends Fragment {
         data.add(new Dictionary("en", "ru", "cat", "кот"));
         data.add(new Dictionary("en", "ru", "cat", "кот"));
         data.add(new Dictionary("en", "ru", "cat", "кот"));
-        AppDatabase.getInstance(getContext()).dictionaryDao().insertAll(data);
+        AppDatabase.getInstance(getContext()).noteDao().insertAll(data);
         DictionaryAdapter dictionaryAdapter = new DictionaryAdapter(data);
         recyclerView.setAdapter(dictionaryAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

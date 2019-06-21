@@ -13,7 +13,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 public abstract class AppDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "dictionary";
     private static AppDatabase INSTANCE;
-    public abstract DictionaryDAO dictionaryDao();
+    public abstract DictionaryDAO noteDao();
 
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {
