@@ -34,11 +34,11 @@ public class DictionaryFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<DictionaryItem> data = new ArrayList<>();
-        data.add(new DictionaryItem("en", "ru", "cat", "кот"));
-        data.add(new DictionaryItem("en", "ru", "cat", "кот"));
-        data.add(new DictionaryItem("en", "ru", "cat", "кот"));
-
+        List<Dictionary> data = new ArrayList<>();
+        data.add(new Dictionary("en", "ru", "cat", "кот"));
+        data.add(new Dictionary("en", "ru", "cat", "кот"));
+        data.add(new Dictionary("en", "ru", "cat", "кот"));
+        AppDatabase.getInstance(getContext()).noteDao().insertAll(data);
         DictionaryAdapter dictionaryAdapter = new DictionaryAdapter(data);
         recyclerView.setAdapter(dictionaryAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

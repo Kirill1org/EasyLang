@@ -12,9 +12,9 @@ import java.util.List;
 
 public class DictionaryAdapter extends RecyclerView.Adapter<DictionaryAdapter.ViewHolder> {
 
-    private List<DictionaryItem> dictionaryItemList;
+    private List<Dictionary> dictionaryItemList;
 
-    public DictionaryAdapter(List<DictionaryItem> dictionaryItemList) {
+    public DictionaryAdapter(List<Dictionary> dictionaryItemList) {
         this.dictionaryItemList = dictionaryItemList;
     }
 
@@ -46,7 +46,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<DictionaryAdapter.Vi
             textTo = view.findViewById(R.id.textTo);
         }
 
-        public void bind(DictionaryItem dictionaryItem) {
+        public void bind(Dictionary dictionaryItem) {
             textFrom.setText(dictionaryItem.getTextFrom());
             textTo.setText(dictionaryItem.getTextTo());
         }

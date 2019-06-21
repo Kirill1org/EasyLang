@@ -19,6 +19,9 @@ public interface DictionaryDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Dictionary dictionary);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<Dictionary> dictionaries);
+
     @Delete
     void delete(Dictionary dictionary);
 
