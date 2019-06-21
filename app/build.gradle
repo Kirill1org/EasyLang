@@ -15,6 +15,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        buildTypes.each {
+            it.buildConfigField 'String', 'YandexTranslateAPIKEY', '\"trnsl.1.1.20190621T175118Z.a0c622c856958eaa.e154b31556ed94517d7c23482eacb0e450446195\"'
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
