@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
         android:src="@drawable/fon1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,10 +51,10 @@
         android:text="⇵"
         android:textColor="@color/colorWhite"
         android:textSize="40dp"
+        app:layout_constraintBottom_toTopOf="@id/output_lang"
         app:layout_constraintEnd_toStartOf="@id/input_word"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_lang"
-        app:layout_constraintBottom_toTopOf="@id/output_lang"/>
+        app:layout_constraintTop_toBottomOf="@+id/input_lang" />
 
     <Spinner
         android:id="@+id/output_lang"
