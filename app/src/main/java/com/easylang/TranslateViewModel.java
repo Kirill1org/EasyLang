@@ -43,7 +43,9 @@ public class TranslateViewModel extends AndroidViewModel {
                         String translation = translateResponse.getText().get(0);
                         liveDataTranslatedText.setValue(translation);
 
-                        AppDatabase.getInstance(getApplication()).dictionaryDAO().insert(new Dictionary(from, to, text, translation));
+                        if ((AppDatabase.getInstance(getApplication()).dictionaryDAO().getByText(text,translation)==0)){
+                            AppDatabase.getInstance(getApplication()).dictionaryDAO().insert(new Dictionary(from, to, text, translation));}
+                        else Toast.makeText(getApplication(), "Just add", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

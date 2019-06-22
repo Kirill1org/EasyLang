@@ -71,6 +71,9 @@ public class DictionaryFragment extends Fragment {
         spinnerInput.setAdapter(adapterInputLanguages);
         spinnerOutput.setAdapter(adapterInputLanguages);
 
+        spinnerOutput.setSelection(adapterInputLanguages.getPosition("Russian"));
+        spinnerInput.setSelection(adapterInputLanguages.getPosition("English"));
+
         spinnerInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
