@@ -8,14 +8,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
 import java.util.List;
 
 public class DictionaryAdapter extends RecyclerView.Adapter<DictionaryAdapter.ViewHolder> {
 
-    private List<Dictionary> dictionaryItemList;
+    private List<Dictionary> dictionaryItemList = Collections.emptyList();
 
-    public DictionaryAdapter(List<Dictionary> dictionaryItemList) {
+    public void setDictionaryItemList(List<Dictionary> dictionaryItemList) {
         this.dictionaryItemList = dictionaryItemList;
+        notifyDataSetChanged();
     }
 
     @NonNull

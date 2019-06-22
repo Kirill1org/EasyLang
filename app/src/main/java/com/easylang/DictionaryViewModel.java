@@ -1,7 +1,27 @@
 package com.easylang;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-public class DictionaryViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+
+import java.util.List;
+
+public class DictionaryViewModel extends AndroidViewModel {
+
+    private DictionaryDAO dictionaryDAO;
+
+    public DictionaryViewModel(@NonNull Application application) {
+        super(application);
+        dictionaryDAO = AppDatabase.getInstance(getApplication()).dictionaryDAO();
+    }
+
+    public LiveData<List<Dictionary>> getAll() {
+        return dictionaryDAO.getAll();
+    }
+
+    public void delete(Dictionary dictionary) {
+        dictionaryDAO.delete(dictionary);
+    }
 }

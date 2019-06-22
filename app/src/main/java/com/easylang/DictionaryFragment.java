@@ -13,12 +13,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DictionaryFragment extends Fragment {
 
     private DictionaryViewModel mViewModel;
+    private DictionaryAdapter dictionaryAdapter;
 
     public static DictionaryFragment newInstance() {
         return new DictionaryFragment();
@@ -33,12 +31,7 @@ public class DictionaryFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<Dictionary> data = new ArrayList<>();
-        data.add(new Dictionary("en", "ru", "cat", "кот"));
-        data.add(new Dictionary("en", "ru", "cat", "кот"));
-        data.add(new Dictionary("en", "ru", "cat", "кот"));
-        AppDatabase.getInstance(getContext()).dictionaryDAO().insertAll(data);
-        DictionaryAdapter dictionaryAdapter = new DictionaryAdapter(data);
+        dictionaryAdapter = new DictionaryAdapter();
         recyclerView.setAdapter(dictionaryAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -49,7 +42,7 @@ public class DictionaryFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(DictionaryViewModel.class);
-        // TODO: Use the ViewModel
+        mViewModel.getAll().observe(this, dictionaries -> dictionaryAdapter.setDictionaryItemList(dictionaries));
     }
 
 }
