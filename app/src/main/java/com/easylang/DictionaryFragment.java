@@ -11,11 +11,14 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 public class DictionaryFragment extends Fragment {
 
@@ -24,6 +27,11 @@ public class DictionaryFragment extends Fragment {
 
     private DictionaryViewModel mViewModel;
     private DictionaryAdapter dictionaryAdapter;
+
+    private LiveData<List<Dictionary>> previousLiveData;
+
+    private String selectedFrom;
+    private String selectedTo;
 
     public static DictionaryFragment newInstance() {
         return new DictionaryFragment();
@@ -54,7 +62,6 @@ public class DictionaryFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(DictionaryViewModel.class);
-        mViewModel.getAll().observe(this, dictionaries -> dictionaryAdapter.setDictionaryItemList(dictionaries));
 
         ArrayAdapter<String> adapterInputLanguages = new ArrayAdapter<>(getActivity(),
                 R.layout.spinner_item,
@@ -67,7 +74,8 @@ public class DictionaryFragment extends Fragment {
         spinnerInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mViewModel.getTranslateByLang(spinnerInput.getSelectedItem().toString(), spinnerOutput.getSelectedItem().toString());
+                selectedFrom = Languages.getLangCode(position);
+                changeLiveData();
             }
 
             @Override
@@ -78,7 +86,8 @@ public class DictionaryFragment extends Fragment {
         spinnerOutput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mViewModel.getTranslateByLang(spinnerInput.getSelectedItem().toString(), spinnerOutput.getSelectedItem().toString());
+                selectedTo = Languages.getLangCode(position);
+                changeLiveData();
             }
 
             @Override
@@ -86,6 +95,16 @@ public class DictionaryFragment extends Fragment {
 
             }
         });
+    }
+
+    private void changeLiveData() {
+        if (previousLiveData != null) {
+            previousLiveData.removeObservers(this);
+        }
+
+        previousLiveData = mViewModel.getTranslateByLang(selectedFrom, selectedTo);
+
+        previousLiveData.observe(this, dictionaryAdapter::setDictionaryItemList);
     }
 
     public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {

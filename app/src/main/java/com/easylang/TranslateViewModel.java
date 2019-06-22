@@ -43,7 +43,6 @@ public class TranslateViewModel extends AndroidViewModel {
                         String translation = translateResponse.getText().get(0);
                         liveDataTranslatedText.setValue(translation);
 
-
                         AppDatabase.getInstance(getApplication()).dictionaryDAO().insert(new Dictionary(from, to, text, translation));
                     }
 
