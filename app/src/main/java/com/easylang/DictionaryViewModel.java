@@ -21,6 +21,10 @@ public class DictionaryViewModel extends AndroidViewModel {
         return dictionaryDAO.getAll();
     }
 
+    public LiveData<List<Dictionary>> getTranslateByLang(String langFrom, String langTo) {
+        return dictionaryDAO.getTranslateByLang(langFrom, langTo);
+    }
+
     public void delete(Dictionary dictionary) {
         dictionaryDAO.delete(dictionary);
     }

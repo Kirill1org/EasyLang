@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,9 +16,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DictionaryFragment extends Fragment {
 
@@ -58,7 +54,7 @@ public class DictionaryFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(DictionaryViewModel.class);
-        mViewModel.getAll().observe(this, dictionaries -> dictionaryAdapter.setDictionaryItemList(dictionaries));
+//        mViewModel.getAll().observe(this, dictionaries -> dictionaryAdapter.setDictionaryItemList(dictionaries));
 
         ArrayAdapter<String> adapterInputLanguages = new ArrayAdapter<>(getActivity(),
                 R.layout.spinner_item,
@@ -71,7 +67,7 @@ public class DictionaryFragment extends Fragment {
         spinnerInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_SHORT).show();
+                mViewModel.getTranslateByLang(spinnerInput.getSelectedItem().toString(), spinnerOutput.getSelectedItem().toString());
             }
 
             @Override
@@ -82,7 +78,7 @@ public class DictionaryFragment extends Fragment {
         spinnerOutput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_SHORT).show();
+                mViewModel.getTranslateByLang(spinnerInput.getSelectedItem().toString(), spinnerOutput.getSelectedItem().toString());
             }
 
             @Override
@@ -90,7 +86,7 @@ public class DictionaryFragment extends Fragment {
 
             }
         });
-
+    }
 
     public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 

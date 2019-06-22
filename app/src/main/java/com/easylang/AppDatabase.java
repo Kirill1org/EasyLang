@@ -54,7 +54,9 @@ public abstract class AppDatabase extends RoomDatabase {
         protected Void doInBackground(Void... voids) {
             dictionaryDAO.deleteAll();
             dictionaryDAO.insert(new Dictionary("en", "ru", "cat", "кот"));
+            dictionaryDAO.insert(new Dictionary("ru", "en", "кот", "cat"));
             dictionaryDAO.insert(new Dictionary("en", "ru", "car", "автомобиль"));
+            dictionaryDAO.insert(new Dictionary("ru", "en", "автомобиль", "car"));
             return null;
         }
     }

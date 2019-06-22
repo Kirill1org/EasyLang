@@ -16,7 +16,7 @@ public interface DictionaryDAO {
     LiveData<List<Dictionary>> getAll();
 
     @Query("SELECT * FROM Dictionary WHERE langFrom=:langFrom and langTo=:langTo")
-    LiveData<List<Dictionary>> getTranslateByLang(String langTo, String langFrom);
+    LiveData<List<Dictionary>> getTranslateByLang(String langFrom, String langTo);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Dictionary dictionary);
