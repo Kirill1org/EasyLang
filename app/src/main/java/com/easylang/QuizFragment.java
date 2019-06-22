@@ -59,7 +59,7 @@ public class QuizFragment extends Fragment {
         quiz = new Quiz();
         question = new Question();
 
-        Dictionary dictionary = AppDatabase.getInstance(getContext()).noteDao().getDataById(getRandomize());
+        Dictionary dictionary = AppDatabase.getInstance(getContext()).dictionaryDAO().getDataById(getRandomize());
         question.setData(dictionary);
         word.setText(question.getData().getTextFrom());
         question.addCase(dictionary.getTextTo());
@@ -92,7 +92,7 @@ public class QuizFragment extends Fragment {
     }
 
     private int getRandomize() {
-        int countData = AppDatabase.getInstance(getContext()).noteDao().getNotesCountByParams(langFrom, langTo);
+        int countData = AppDatabase.getInstance(getContext()).dictionaryDAO().getNotesCountByParams(langFrom, langTo);
         return (int) (Math.random() * (countData - 1));
     }
 }
