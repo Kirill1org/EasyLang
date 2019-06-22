@@ -69,7 +69,9 @@ public class DictionaryFragment extends Fragment {
 
         adapterInputLanguages.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerInput.setAdapter(adapterInputLanguages);
+        spinnerInput.setSelection(adapterInputLanguages.getPosition("English"));
         spinnerOutput.setAdapter(adapterInputLanguages);
+        spinnerOutput.setSelection(adapterInputLanguages.getPosition("Russian"));
 
         spinnerOutput.setSelection(adapterInputLanguages.getPosition("Russian"));
         spinnerInput.setSelection(adapterInputLanguages.getPosition("English"));

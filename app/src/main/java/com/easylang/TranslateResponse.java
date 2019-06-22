@@ -7,23 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TranslateResponse {
-//    @SerializedName("code")
-//    @Expose
-//    private int code;
     @SerializedName("lang")
     @Expose
     private String lang;
     @SerializedName("text")
     @Expose
     private List<String> text;
-
-//    public int getCode() {
-//        return code;
-//    }
-//
-//    public void setCode(int code) {
-//        this.code = code;
-//    }
 
     public String getLang() {
         return lang;

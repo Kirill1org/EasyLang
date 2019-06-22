@@ -11,7 +11,6 @@ import java.util.List;
 
 @Dao
 public interface DictionaryDAO {
-
     @Query("SELECT * FROM Dictionary")
     LiveData<List<Dictionary>> getAll();
 
@@ -20,6 +19,12 @@ public interface DictionaryDAO {
 
     @Query("SELECT COUNT(textFrom)  FROM Dictionary WHERE textFrom = :textFrom and textTo=:textTo")
     int getByText(String textFrom, String textTo);
+
+    @Query("SELECT COUNT(id) FROM Dictionary")
+    int getNotesCount();
+
+    @Query("SELECT * FROM Dictionary WHERE id=:id")
+    Dictionary getDataById(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Dictionary dictionary);
@@ -33,7 +38,6 @@ public interface DictionaryDAO {
     @Query("DELETE FROM Dictionary")
     void deleteAll();
 
-//    @Query("SELECT * FROM Dictionary WHERE ")
-//    Dictionary getDictionary()
-
+    @Query("SELECT COUNT(id) FROM Dictionary WHERE langFrom=:langFrom and langTo=:langTo")
+    int getNotesCountByParams(String langFrom, String langTo);
 }
