@@ -82,6 +82,10 @@ public class TranslateFragment extends Fragment {
             Toast.makeText(getActivity(), "Output language not selected", Toast.LENGTH_LONG).show();
             return;
         }
+        if (inputSelectedItemPosition == outputSelectedItemPosition) {
+            Toast.makeText(getActivity(), "Languages are the same", Toast.LENGTH_LONG).show();
+            return;
+        }
         mViewModel.translate(editTextInput.getText().toString(), languages[inputSelectedItemPosition], languages[outputSelectedItemPosition]);
     }
 }
