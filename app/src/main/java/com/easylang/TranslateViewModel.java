@@ -15,16 +15,10 @@ import retrofit2.Response;
 public class TranslateViewModel extends AndroidViewModel {
     private static final String TAG = TranslateViewModel.class.getSimpleName();
 
-    private static final String[] LANGUAGES = {"en", "ru"};
-
     private final MutableLiveData<String> liveDataTranslatedText = new MutableLiveData<>();
 
     public TranslateViewModel(@NonNull Application application) {
         super(application);
-    }
-
-    public static String[] getLANGUAGES() {
-        return LANGUAGES;
     }
 
     public MutableLiveData<String> getLiveDataTranslatedText() {

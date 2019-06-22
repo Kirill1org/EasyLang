@@ -54,11 +54,11 @@ public class DictionaryFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(DictionaryViewModel.class);
-//        mViewModel.getAll().observe(this, dictionaries -> dictionaryAdapter.setDictionaryItemList(dictionaries));
+        mViewModel.getAll().observe(this, dictionaries -> dictionaryAdapter.setDictionaryItemList(dictionaries));
 
         ArrayAdapter<String> adapterInputLanguages = new ArrayAdapter<>(getActivity(),
                 R.layout.spinner_item,
-                TranslateViewModel.getLANGUAGES());
+                Languages.getLangNames());
 
         adapterInputLanguages.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerInput.setAdapter(adapterInputLanguages);

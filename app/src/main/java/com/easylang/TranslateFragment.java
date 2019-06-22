@@ -56,7 +56,7 @@ public class TranslateFragment extends Fragment {
 
         ArrayAdapter<String> adapterInputLanguages = new ArrayAdapter<>(getActivity(),
                 R.layout.spinner_item,
-                TranslateViewModel.getLANGUAGES());
+                Languages.getLangNames());
 
         adapterInputLanguages.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerInput.setAdapter(adapterInputLanguages);
@@ -70,7 +70,7 @@ public class TranslateFragment extends Fragment {
     }
 
     public void translate(View view) {
-        String[] languages = TranslateViewModel.getLANGUAGES();
+        String[] languages = Languages.getLangCodes();
 
         int inputSelectedItemPosition = spinnerInput.getSelectedItemPosition();
         int outputSelectedItemPosition = spinnerOutput.getSelectedItemPosition();
