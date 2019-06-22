@@ -41,6 +41,7 @@ public class TranslateFragment extends Fragment {
 
         spinnerInput = rootView.findViewById(R.id.input_lang);
         spinnerOutput = rootView.findViewById(R.id.output_lang);
+        ;
 
         editTextInput = rootView.findViewById(R.id.input_word);
         textViewOutput = rootView.findViewById(R.id.output_word);

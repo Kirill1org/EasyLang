@@ -54,6 +54,7 @@ public class TranslateViewModel extends AndroidViewModel {
                     @Override
                     public void onFailure(Call<TranslateResponse> call, Throwable t) {
                         Log.d(TAG, "Network failure!", t);
+                        Toast.makeText(getApplication(), "Connection error", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
