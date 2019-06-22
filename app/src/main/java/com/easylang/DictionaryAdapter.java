@@ -33,6 +33,10 @@ public class DictionaryAdapter extends RecyclerView.Adapter<DictionaryAdapter.Vi
         viewHolder.bind(dictionaryItemList.get(i));
     }
 
+    public Dictionary get(int position) {
+        return dictionaryItemList.get(position);
+    }
+
     @Override
     public int getItemCount() {
         return dictionaryItemList.size();
