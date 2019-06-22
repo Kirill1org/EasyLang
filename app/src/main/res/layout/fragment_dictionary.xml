@@ -12,42 +12,68 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/fon2"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="44dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textViewWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Word"
+        android:textColor="@color/colorWhite"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTranslation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/input_spin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginTop="8dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@id/recyclerView"
-        app:layout_constraintEnd_toStartOf="@id/output_spin"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewWord"
+        app:layout_constraintStart_toStartOf="@+id/textViewWord"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWord" />
+
+    <TextView
+        android:id="@+id/textViewTranslation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Translation"
+        android:textColor="@color/colorWhite"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewWord"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/output_spin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginTop="8dp"
         android:background="?android:attr/selectableItemBackground"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/input_spin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/recyclerView" />
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTranslation"
+        app:layout_constraintStart_toStartOf="@+id/textViewTranslation"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTranslation" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_spin">
+        app:layout_constraintTop_toBottomOf="@+id/output_spin">
 
     </androidx.recyclerview.widget.RecyclerView>
 

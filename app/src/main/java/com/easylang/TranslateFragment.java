@@ -28,6 +28,7 @@ public class TranslateFragment extends Fragment {
     private TextView textViewOutput;
 
     private Button buttonTranslate;
+    private Button buttonSwap;
 
     public static TranslateFragment newInstance() {
         return new TranslateFragment();
@@ -46,6 +47,7 @@ public class TranslateFragment extends Fragment {
         editTextInput = rootView.findViewById(R.id.input_word);
         textViewOutput = rootView.findViewById(R.id.output_word);
         buttonTranslate = rootView.findViewById(R.id.button_translate);
+        buttonSwap = rootView.findViewById(R.id.button_swap);
 
         return rootView;
     }
@@ -71,6 +73,14 @@ public class TranslateFragment extends Fragment {
         });
 
         buttonTranslate.setOnClickListener(this::translate);
+        buttonSwap.setOnClickListener(this::swap);
+    }
+
+    private void swap(View view) {
+        int positionInput = spinnerInput.getSelectedItemPosition();
+        spinnerInput.setSelection(spinnerOutput.getSelectedItemPosition());
+        spinnerOutput.setSelection(positionInput);
+
     }
 
     public void translate(View view) {

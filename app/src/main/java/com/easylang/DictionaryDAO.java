@@ -40,4 +40,10 @@ public interface DictionaryDAO {
 
     @Query("SELECT COUNT(id) FROM Dictionary WHERE langFrom=:langFrom and langTo=:langTo")
     int getNotesCountByParams(String langFrom, String langTo);
+
+    @Query("SELECT * FROM Dictionary\n" +
+            "WHERE langFrom=:langFrom and langTo=:langTo\n" +
+            "ORDER BY RANDOM()\n" +
+            "LIMIT :count")
+    List<Dictionary> getRandomWords(String langFrom, String langTo, int count);
 }
