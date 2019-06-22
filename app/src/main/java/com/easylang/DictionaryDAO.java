@@ -14,7 +14,13 @@ public interface DictionaryDAO {
     List<Dictionary> getAll();
 
     @Query("SELECT * FROM Dictionary WHERE langFrom=:langFrom and langTo=:langTo")
-    List<Dictionary> getTranslateByLang(String langTo, String langFrom);
+    List<Dictionary> getTranslateByLang(String langFrom, String langTo);
+
+    @Query("SELECT COUNT(id) FROM Dictionary")
+    int getNotesCount();
+
+    @Query("SELECT * FROM Dictionary WHERE id=:id")
+    Dictionary getDataById(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Dictionary dictionary);
@@ -25,7 +31,6 @@ public interface DictionaryDAO {
     @Delete
     void delete(Dictionary dictionary);
 
-//    @Query("SELECT * FROM Dictionary WHERE ")
-//    Dictionary getDictionary()
-
+    @Query("SELECT COUNT(id) FROM Dictionary WHERE langFrom=:langFrom and langTo=:langTo")
+    int getNotesCountByParams(String langFrom, String langTo);
 }
