@@ -7,12 +7,20 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:gravity="center" />
+        android:gravity="center"
+        android:background="?android:attr/selectableItemBackground"
+        android:textSize="@dimen/text_size_recycler"
+        android:layout_margin="@dimen/recycler_margin"
+        android:textColor="@color/colorWhite"/>
     <TextView
         android:id="@+id/textTo"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:gravity="center" />
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:layout_margin="@dimen/recycler_margin"
+        android:textSize="@dimen/text_size_recycler"
+        android:textColor="@color/colorWhite"/>
 
 </LinearLayout>
