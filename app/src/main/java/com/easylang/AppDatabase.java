@@ -21,8 +21,6 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
-    public abstract DictionaryDAO dictionaryDAO();
-
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
@@ -41,6 +39,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public static void destroyInstance() {
         INSTANCE = null;
     }
+
+    public abstract DictionaryDAO dictionaryDAO();
 
     private static class PopulateAsyncTask extends AsyncTask<Void, Void, Void> {
 

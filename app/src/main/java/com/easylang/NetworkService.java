@@ -7,8 +7,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkService {
-    private static NetworkService instance;
     private static final String BASE_URL = "https://translate.yandex.net";
+    private static NetworkService instance;
     private Retrofit mRetrofit;
     private OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
