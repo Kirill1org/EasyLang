@@ -18,9 +18,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DictionaryFragment extends Fragment {
 
     private Spinner spinnerInput;
@@ -90,7 +87,7 @@ public class DictionaryFragment extends Fragment {
 
             }
         });
-
+    }
 
     public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
