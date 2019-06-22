@@ -50,9 +50,7 @@ public class TranslateViewModel extends AndroidViewModel {
                         liveDataTranslatedText.setValue(translation);
 
 
-                        AppDatabase.getInstance(getApplication())
-                                .dictionaryDAO()
-                                .insert(new Dictionary(from, to, text, translation));
+                        AppDatabase.getInstance(getApplication()).dictionaryDAO().insert(new Dictionary(from, to, text, translation));
                     }
 
                     @Override
