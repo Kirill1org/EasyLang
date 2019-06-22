@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,6 +46,10 @@ public class DictionaryFragment extends Fragment {
         dictionaryAdapter = new DictionaryAdapter();
         recyclerView.setAdapter(dictionaryAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        ItemTouchHelper itemTouchHelper = new
+                ItemTouchHelper(new SwipeToDeleteCallback(dictionaryAdapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         return rootView;
     }
@@ -87,6 +92,24 @@ public class DictionaryFragment extends Fragment {
         });
 
 
+    public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
+
+        private DictionaryAdapter mAdapter;
+
+        public SwipeToDeleteCallback(DictionaryAdapter adapter) {
+            super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+            mAdapter = adapter;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition();
+            mViewModel.delete(dictionaryAdapter.get(position));
+        }
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
     }
 }
-
