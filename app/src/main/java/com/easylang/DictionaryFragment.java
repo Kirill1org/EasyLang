@@ -24,6 +24,7 @@ public class DictionaryFragment extends Fragment {
     private Spinner spinnerOutput;
 
     private DictionaryViewModel mViewModel;
+    private DictionaryAdapter dictionaryAdapter;
 
     public static DictionaryFragment newInstance() {
         return new DictionaryFragment();
@@ -32,7 +33,6 @@ public class DictionaryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_dictionary, container, false);
         spinnerInput = rootView.findViewById(R.id.input_spin);
         spinnerOutput = rootView.findViewById(R.id.output_spin);
@@ -40,12 +40,7 @@ public class DictionaryFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<Dictionary> data = new ArrayList<>();
-        data.add(new Dictionary("en", "ru", "cat", "кот"));
-        data.add(new Dictionary("en", "ru", "cat", "кот"));
-        data.add(new Dictionary("en", "ru", "cat", "кот"));
-        AppDatabase.getInstance(getContext()).dictionaryDAO().insertAll(data);
-        DictionaryAdapter dictionaryAdapter = new DictionaryAdapter(data);
+        dictionaryAdapter = new DictionaryAdapter();
         recyclerView.setAdapter(dictionaryAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -55,7 +50,9 @@ public class DictionaryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-      mViewModel = ViewModelProviders.of(this).get(DictionaryViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(DictionaryViewModel.class);
+        mViewModel.getAll().observe(this, dictionaries -> dictionaryAdapter.setDictionaryItemList(dictionaries));
+
         ArrayAdapter<String> adapterInputLanguages = new ArrayAdapter<>(getActivity(),
                 R.layout.spinner_item,
                 TranslateViewModel.getLANGUAGES());
@@ -63,7 +60,7 @@ public class DictionaryFragment extends Fragment {
         adapterInputLanguages.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerInput.setAdapter(adapterInputLanguages);
         spinnerOutput.setAdapter(adapterInputLanguages);
-        // TODO: Use the ViewModel
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.easylang;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -10,11 +11,12 @@ import java.util.List;
 
 @Dao
 public interface DictionaryDAO {
+
     @Query("SELECT * FROM Dictionary")
-    List<Dictionary> getAll();
+    LiveData<List<Dictionary>> getAll();
 
     @Query("SELECT * FROM Dictionary WHERE langFrom=:langFrom and langTo=:langTo")
-    List<Dictionary> getTranslateByLang(String langTo, String langFrom);
+    LiveData<List<Dictionary>> getTranslateByLang(String langTo, String langFrom);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Dictionary dictionary);
@@ -24,6 +26,9 @@ public interface DictionaryDAO {
 
     @Delete
     void delete(Dictionary dictionary);
+
+    @Query("DELETE FROM Dictionary")
+    void deleteAll();
 
 //    @Query("SELECT * FROM Dictionary WHERE ")
 //    Dictionary getDictionary()
